@@ -1,6 +1,6 @@
 CC = gcc
-CFLAGS = -I./include -Wall -Wextra -std=c11
-LDFLAGS = -L./lib -lSDL2main -lSDL2 -lm -mwindows
+CFLAGS = -I./include -Wall -Wextra -std=c11 -Dmain=SDL_main
+LDFLAGS = -L./lib -lmingw32 -lSDL2main -lSDL2 -lm -mwindows
 
 SRC = src/main.c src/game.c
 OBJ = $(SRC:.c=.o)
@@ -16,3 +16,9 @@ $(EXEC): $(OBJ)
 
 clean:
 	rm -f $(OBJ) $(EXEC)
+
+run: $(EXEC)
+	./$(EXEC)
+	$(MAKE) clean
+
+.PHONY: all clean run

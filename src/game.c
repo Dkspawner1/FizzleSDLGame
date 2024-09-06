@@ -89,7 +89,7 @@ static void Update(Game *self)
 static void Render(Game *self)
 {
     (void)self; // Suppress unused parameter warning
-    SDL_SetRenderDrawColor(gameState.renderer, 0, 0, 0, 255);
+    SDL_SetRenderDrawColor(gameState.renderer, 255, 20, 147, 255);
     SDL_RenderClear(gameState.renderer);
 
     // Render game objects here
