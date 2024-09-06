@@ -1,28 +1,18 @@
-# Makefile for SDL2 game
-
-# Compiler and flags
 CC = gcc
-CFLAGS = $(shell pkg-config --cflags sdl2) -Wall
-LIBS = $(shell pkg-config --libs sdl2)
+CFLAGS = -I./include -Wall -Wextra -std=c11
+LDFLAGS = -L./lib -lSDL2main -lSDL2 -lm -mwindows
 
-# Source files and executable name
-SRCS = $(wildcard src/*.c)
-EXEC = game.exe
+SRC = src/main.c src/game.c
+OBJ = $(SRC:.c=.o)
+EXEC = game
 
-# Default target
 all: $(EXEC)
 
-# Compile the game
-$(EXEC): $(SRCS)
-	$(CC) $(CFLAGS) $^ $(LIBS) -o $@
+$(EXEC): $(OBJ)
+	$(CC) $(OBJ) -o $@ $(LDFLAGS)
 
-# Run the game
-run: $(EXEC)
-	./$(EXEC)
+%.o: %.c
+	$(CC) -c $< -o $@ $(CFLAGS)
 
-# Clean build artifacts
 clean:
-	rm -f $(EXEC)
-
-# Phony targets
-.PHONY: all run clean
+	rm -f $(OBJ) $(EXEC)
